@@ -1,5 +1,7 @@
 import Fastify from 'fastify';
 import { config } from 'dotenv';
+import { handleUserRegistration } from './endpoints/user-registration';
+import { handleCreateInvitation } from './endpoints/invitation-endpoints';
 
 config();
 
@@ -15,6 +17,9 @@ const server = Fastify({
 server.get('/', async () => {
   return { hello: 'world' };
 });
+
+server.post('/api/user-registration', handleUserRegistration);
+server.post('/api/invitations', handleCreateInvitation);
 
 const start = async () => {
   try {
